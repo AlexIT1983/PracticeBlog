@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Div = styled.div`
 	text-align: center;
 	text-decoration: bold;
-	font-size: 20px;
+	font-size: 22px;
 `;
 
 export const App = () => {
