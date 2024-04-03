@@ -2,7 +2,7 @@
 // функция принимает в себя roleId(роль) в зависимости от этого выдает разный результат
 
 import { removeComment } from './session';
-import { ROLE } from './constans'; // константы с ролями
+import { ROLE } from '../constans'; // константы с ролями
 
 export const createSession = (roleId) => {
 	const session = {
@@ -24,6 +24,9 @@ export const createSession = (roleId) => {
 			break;
 		}
 		case ROLE.READER: {
+			break;
+		}
+		case ROLE.GUEST: {
 			break;
 		}
 		default: // ничего не делать

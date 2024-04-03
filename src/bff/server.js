@@ -1,11 +1,16 @@
 // Наш эмулированный BFF (Backend for Frontend)
 
-import { createSession } from './create-session';
+import { sessions } from './sessions';
 import { getUser } from './get-user';
 import { addUser } from './add-user';
 
 // сделаем его в виде объекта
 export const server = {
+	// сделаем logout
+	async logout(session) {
+		sessions.remove(session);
+	},
+
 	// метод авторайз для ввода пользователем логина и пароля
 	// мы должны проверить есть ли такая пара - логин и пароль, используем async await
 	async authorize(authLogin, authPassword) {
@@ -32,7 +37,12 @@ export const server = {
 		// если все проверки пройдены, возвращаем объект c сессией
 		return {
 			error: null,
-			res: createSession(user.role_id),
+			res: {
+				id: user.id,
+				login: user.login,
+				roleId: user.role_id,
+				session: sessions.create(user),
+			},
 		};
 	},
 
@@ -56,7 +66,12 @@ export const server = {
 
 		return {
 			error: null,
-			res: createSession(user.role_id),
+			res: {
+				id: user.id,
+				login: user.login,
+				roleId: user.role_id,
+				session: sessions.create(user),
+			},
 		};
 	},
 };

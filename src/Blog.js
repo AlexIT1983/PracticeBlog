@@ -3,6 +3,7 @@
 import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { Header, Footer } from './components';
+import { Authorization } from './pages';
 
 const AppColumn = styled.div`
 	display: flex;
@@ -19,9 +20,6 @@ const Content = styled.div`
 	text-decoration: bold;
 	font-size: 22px;
 `;
-const H2 = styled.h2`
-	text-align: center;
-`;
 
 export const Blog = () => {
 	return (
@@ -30,11 +28,10 @@ export const Blog = () => {
 
 			<Content>
 				<i className="fa fa-camera-retro"></i>
-				<H2>Контент страницы</H2>
 				<Routes>
 					<Route path="/" element={<div>Главная страница</div>} />
-					<Route path="/login" element={<div>Авторизации</div>} />
-					<Route path="/register" element={<div>Регистрации</div>} />
+					<Route path="/login" element={<Authorization />} />
+					<Route path="/register" element={<div>Registration</div>} />
 					<Route path="/users" element={<div>Пользователи</div>} />
 					<Route path="/post" element={<div>Новая статья</div>} />
 					<Route path="/post/:postId" element={<div>Статья</div>} />

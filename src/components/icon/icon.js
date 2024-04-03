@@ -2,8 +2,8 @@
 import styled from 'styled-components';
 
 // Создадим контейнер для иконки
-const IconConteiner = ({ className, id }) => (
-	<div className={className}>
+const IconConteiner = ({ className, id, ...props }) => (
+	<div className={className} {...props}>
 		<i className={`fa ${id}`} aria-hidden="true"></i>
 	</div>
 );
