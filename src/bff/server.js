@@ -49,20 +49,19 @@ export const server = {
 	// register - ручка для реализации регистрации async (функция асинхронная)
 	async register(regLogin, regPassword) {
 		// получаем пользователя через функцию getUser
-		const user = await getUser(regLogin);
+		const existedUser = await getUser(regLogin);
 
 		// проверяем пользователя, если найден - это проблема, мы остановимся
-		if (user) {
+		if (existedUser) {
 			return {
 				error: 'Такой логин уже занят',
 				res: null,
 			};
 		}
 		// сделаем метод POST на сервер, нового пользователя через функцию addUser
-		await addUser(regLogin, regPassword);
+		const user = await addUser(regLogin, regPassword);
 
 		// если пользователя не найдено, мы регистрируем его и даем ему сессию
-		// через нашу функцию createSession(user.role_id)
 
 		return {
 			error: null,
