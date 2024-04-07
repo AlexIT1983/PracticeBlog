@@ -12,4 +12,9 @@ const IconConteiner = ({ className, id, ...props }) => (
 export const Icon = styled(IconConteiner)`
 	font-size: ${({ size = '24xp' }) => size};
 	margin: ${({ margin = '0' }) => margin};
+	color: ${({ disabled }) => (disabled ? '#ccc' : '#000')};
+
+	&:hover {
+		cursor: pointer;
+	}
 `;

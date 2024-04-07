@@ -1,76 +1,29 @@
 // Наш эмулированный BFF (Backend for Frontend)
 
-import { sessions } from './sessions';
-import { getUser } from './get-user';
-import { addUser } from './add-user';
+import {
+	authorize,
+	logout,
+	register,
+	fetchRoles,
+	fetchUsers,
+	updateUserRole,
+	removeUser,
+} from './operations';
 
 // сделаем его в виде объекта
 export const server = {
-	// сделаем logout
-	async logout(session) {
-		sessions.remove(session);
-	},
-
-	// метод авторайз для ввода пользователем логина и пароля
-	// мы должны проверить есть ли такая пара - логин и пароль, используем async await
-	async authorize(authLogin, authPassword) {
-		// ищем в массиве конкретного пользователя, через функцию getUser
-		const user = await getUser(authLogin);
-
-		// проверяем пользователя, если найден - идем дальше, если нет остановка
-		if (!user) {
-			return {
-				error: 'Такой пользователь не найден',
-				res: null,
-			};
-		}
-
-		// пользователь найден, проверяем пароль
-		// если же это условие не выполнится, идем дальше и найден пароль и пользователь
-		if (authPassword !== user.password) {
-			return {
-				error: 'Введен не корректный пароль',
-				res: null,
-			};
-		}
-
-		// если все проверки пройдены, возвращаем объект c сессией
-		return {
-			error: null,
-			res: {
-				id: user.id,
-				login: user.login,
-				roleId: user.role_id,
-				session: sessions.create(user),
-			},
-		};
-	},
-
-	// register - ручка для реализации регистрации async (функция асинхронная)
-	async register(regLogin, regPassword) {
-		// получаем пользователя через функцию getUser
-		const existedUser = await getUser(regLogin);
-
-		// проверяем пользователя, если найден - это проблема, мы остановимся
-		if (existedUser) {
-			return {
-				error: 'Такой логин уже занят',
-				res: null,
-			};
-		}
-		// сделаем метод POST на сервер, нового пользователя через функцию addUser
-		const user = await addUser(regLogin, regPassword);
-
-		// если пользователя не найдено, мы регистрируем его и даем ему сессию
-
-		return {
-			error: null,
-			res: {
-				id: user.id,
-				login: user.login,
-				roleId: user.role_id,
-				session: sessions.create(user),
-			},
-		};
-	},
+	// теперь тут будет отдельная функция logout
+	logout,
+	// тут будет authorize
+	authorize,
+	// register
+	register,
+	// fetchRoles (запрос ролей) только админ
+	fetchRoles,
+	// fetchUsers (запрос пользователей) только админ
+	fetchUsers,
+	// updateUserRole ( запрос на смену роли пользователя)
+	updateUserRole,
+	// removeUser (запрос на удаление пользователя)
+	removeUser,
 };

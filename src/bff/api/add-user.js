@@ -1,5 +1,5 @@
 // Функция добавление пользователя
-import { generateDate } from './generate.-date';
+import { generateDate } from '../utils/generate.-date';
 
 // сделаем метод POST на сервер, нового пользователя
 export const addUser = (login, password) =>

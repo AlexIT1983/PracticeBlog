@@ -2,7 +2,7 @@
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { server } from '../../bff/server';
+import { server } from '../../bff';
 import { useState } from 'react';
 import { AuthFormError, Input, Button, H2 } from '../../components';
 import { useResetForm } from '../../hooks';

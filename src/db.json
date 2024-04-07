@@ -13,6 +13,20 @@
       "registed_at": "2012-10-09 18:56",
       "role_id": 2,
       "id": "WdKTdFm"
+    },
+    {
+      "login": "vlad",
+      "password": "vlad4321",
+      "registed_at": "2032-07-25 03:42",
+      "role_id": 2,
+      "id": "kO7jfl8"
+    },
+    {
+      "login": "egor",
+      "password": "egor4321",
+      "registed_at": "2028-03-09 23:08",
+      "role_id": 2,
+      "id": "YCLfdUj"
     }
   ],
   "roles": [
