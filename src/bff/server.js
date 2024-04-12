@@ -10,6 +10,7 @@ import {
 	updateUserRole,
 	removeUser,
 	addPostComment,
+	removePostComment,
 } from './operations';
 
 // сделаем его в виде объекта
@@ -32,4 +33,6 @@ export const server = {
 	fetchPost,
 	// addPostComment (добавление комментария к статье)
 	addPostComment,
+	// removePostComment (удаление комментария к статье)
+	removePostComment,
 };

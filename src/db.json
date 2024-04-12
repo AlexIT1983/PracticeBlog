@@ -114,20 +114,6 @@
   ],
   "comments": [
     {
-      "author_id": "002",
-      "post_id": "001",
-      "content": "мой второй пост",
-      "published_at": "2016-07-23 03:48",
-      "id": 1
-    },
-    {
-      "author_id": "002",
-      "post_id": "001",
-      "content": "1233",
-      "published_at": "2017-06-15 06:33",
-      "id": 2
-    },
-    {
       "author_id": "001",
       "post_id": "001",
       "content": "1233rrr555",
@@ -140,13 +126,6 @@
       "content": "1233rrr555 bggh",
       "published_at": "2024-03-17 05:19",
       "id": 4
-    },
-    {
-      "author_id": "002",
-      "post_id": "001",
-      "content": "Мой четвертый комментарий",
-      "published_at": "2041-08-30 14:27",
-      "id": 5
     },
     {
       "author_id": "002",
