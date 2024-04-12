@@ -72,6 +72,8 @@ const RegistrationContainer = ({ className }) => {
 				return;
 			}
 			dispatch(setUser(res));
+			// отправить данные в sessionStorage
+			sessionStorage.setItem('userData', JSON.stringify(res));
 		});
 	};
 

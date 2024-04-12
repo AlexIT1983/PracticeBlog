@@ -6,8 +6,10 @@ import {
 	register,
 	fetchRoles,
 	fetchUsers,
+	fetchPost,
 	updateUserRole,
 	removeUser,
+	addPostComment,
 } from './operations';
 
 // сделаем его в виде объекта
@@ -26,4 +28,8 @@ export const server = {
 	updateUserRole,
 	// removeUser (запрос на удаление пользователя)
 	removeUser,
+	// fetchPost ( запрос статьи на сервере)
+	fetchPost,
+	// addPostComment (добавление комментария к статье)
+	addPostComment,
 };

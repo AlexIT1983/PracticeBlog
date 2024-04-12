@@ -5,12 +5,14 @@ import { sessions } from '../sessions';
 import { ROLE } from '../constans/role';
 
 // fetchRoles - ручка для реализации запроса пользователей async (функция асинхронная)
-export const fetchUsers = async (userSession) => {
+export const fetchUsers = async (hash) => {
 	// получаем списко ролей для пользователей
 	const accessRoles = [ROLE.ADMIN];
 
 	// проверяем пользователя, если найден - это проблема, мы остановимся
-	if (!sessions.access(userSession, accessRoles)) {
+	const access = await sessions.access(hash, accessRoles);
+
+	if (!access) {
 		return {
 			error: 'Доступ запрещен',
 			res: null,
