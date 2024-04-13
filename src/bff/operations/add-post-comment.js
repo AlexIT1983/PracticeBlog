@@ -5,7 +5,7 @@ import { ROLE } from '../../constans';
 
 // addComment - ручка для реализации запроса comment async (функция асинхронная)
 export const addPostComment = async (hash, postId, userId, content) => {
-	// получаем списко ролей для пользователей
+	// получаем список ролей для пользователей
 	const accessRoles = [ROLE.ADMIN, ROLE.MODERATOR, ROLE.READER];
 
 	// проверяем пользователя, если найден - это проблема, мы остановимся

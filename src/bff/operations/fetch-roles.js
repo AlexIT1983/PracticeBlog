@@ -6,7 +6,7 @@ import { ROLE } from '../constans/role';
 
 // fetchRoles - ручка для реализации запроса ролей async (функция асинхронная)
 export const fetchRoles = async (hash) => {
-	// получаем списко ролей для пользователей
+	// получаем список ролей для пользователей
 	const accessRoles = [ROLE.ADMIN];
 	// проверяем пользователя, если найден - это проблема, мы остановимся
 	const access = await sessions.access(hash, accessRoles);

@@ -4,7 +4,7 @@ import { sessions } from '../sessions';
 import { setUserRole } from '../api';
 
 export const updateUserRole = async (hash, userId, newUserRoleId) => {
-	// получаем списко ролей для пользователей
+	// получаем список ролей для пользователей
 	const accessRoles = [ROLE.ADMIN];
 
 	// проверяем пользователя, если найден - это проблема, мы остановимся

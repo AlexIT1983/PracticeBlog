@@ -6,7 +6,7 @@ import { ROLE } from '../../constans';
 
 // removePostComment - ручка для реализации запроса удаления comment async (функция асинхронная)
 export const removePostComment = async (hash, postId, id) => {
-	// получаем списко ролей для пользователей
+	// получаем список ролей для пользователей
 	const accessRoles = [ROLE.ADMIN, ROLE.MODERATOR];
 
 	// проверяем пользователя, если найден - это проблема, мы остановимся
