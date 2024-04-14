@@ -2,7 +2,7 @@
 
 import { ROLE } from '../../constans';
 import { sessions } from '../sessions';
-import { updatePost } from '../api';
+import { addPost, updatePost } from '../api';
 
 export const savePost = async (hash, newPostData) => {
 	// получаем список ролей для пользователей
@@ -19,10 +19,14 @@ export const savePost = async (hash, newPostData) => {
 	}
 
 	//если доступ есть, то совершаем операцию обновления поста
-	const updatedPost = await updatePost(newPostData);
+	// делаем ветвление для условного ветвления
+	const savedPost =
+		newPostData.id === ''
+			? await addPost(newPostData)
+			: await updatePost(newPostData);
 
 	return {
 		error: null,
-		res: updatedPost,
+		res: savedPost,
 	};
 };
