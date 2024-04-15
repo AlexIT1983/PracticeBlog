@@ -12,7 +12,9 @@ export const useServerRequest = () => {
 	// сделаем выборочный запрос request
 	return useCallback(
 		(operation, ...params) => {
-			const request = ['register', 'authorize', 'fetchPost'].includes(operation)
+			const request = ['register', 'authorize', 'fetchPost', 'fetchPosts'].includes(
+				operation,
+			)
 				? params
 				: [session, ...params];
 			// возвращаем операции и request

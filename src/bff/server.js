@@ -13,6 +13,7 @@ import {
 	removePostComment,
 	savePost,
 	removePost,
+	fetchPosts,
 } from './operations';
 
 // сделаем его в виде объекта
@@ -41,4 +42,6 @@ export const server = {
 	savePost,
 	// removePost (операция по удаления статьи с сервера)
 	removePost,
+	// fetchPosts (операция по запросу всех статей)
+	fetchPosts,
 };
