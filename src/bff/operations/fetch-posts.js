@@ -4,10 +4,10 @@ import { getComments, getPosts } from '../api';
 import { getCommentsCount } from '../utils';
 
 // fetchPosts - ручка для реализации запроса статей async (функция асинхронная)
-export const fetchPosts = async (page, limit) => {
+export const fetchPosts = async (searchPhrase, page, limit) => {
 	// сделаем запрос статей комментариев в одном запросе
 	const [{ posts, links }, comments] = await Promise.all([
-		getPosts(page, limit),
+		getPosts(searchPhrase, page, limit),
 		getComments(),
 	]);
 
