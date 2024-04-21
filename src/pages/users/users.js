@@ -1,11 +1,14 @@
 // Наш компонент для страницы пользователи
 
-import { H2, Content } from '../../components';
+import { H2, PrivateContent } from '../../components';
 import { TableRow, UserRow } from './components';
 import { useServerRequest } from '../../hooks';
-import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { ROLE } from '../../constans';
+import { checkAccess } from '../../utils';
+import { useSelector } from 'react-redux';
+import { selectUserRole } from '../../selectors';
+import styled from 'styled-components';
 
 const UserContainer = ({ className }) => {
 	// создадим состояние для списка ролей, пользователей и ошибки
@@ -13,12 +16,16 @@ const UserContainer = ({ className }) => {
 	const [roles, setRoles] = useState([]);
 	const [users, setUsers] = useState([]);
 	const [shouldUpdateUserList, setshouldUpdateUserList] = useState(false);
-
+	const userRole = useSelector(selectUserRole);
 	// запрос от сервера (вернет функцию)
 	const requestServer = useServerRequest();
 
 	// в хуке useEffect делаем запрос к серверу.
 	useEffect(() => {
+		if (!checkAccess([ROLE.ADMIN], userRole)) {
+			return;
+		}
+
 		Promise.all([requestServer('fetchUsers'), requestServer('fetchRoles')]).then(
 			([usersRes, rolesRes]) => {
 				if (usersRes.error || rolesRes.error) {
@@ -30,10 +37,14 @@ const UserContainer = ({ className }) => {
 				setRoles(rolesRes.res);
 			},
 		);
-	}, [requestServer, shouldUpdateUserList]);
+	}, [requestServer, shouldUpdateUserList, userRole]);
 
 	// функция для удаления пользователя
-	const onUserRomove = (userId) => {
+	const onUserRemove = (userId) => {
+		if (!checkAccess([ROLE.ADMIN], userRole)) {
+			return;
+		}
+
 		requestServer('removeUser', userId).then(() => {
 			setshouldUpdateUserList(!shouldUpdateUserList);
 		});
@@ -41,7 +52,7 @@ const UserContainer = ({ className }) => {
 
 	return (
 		<div className={className}>
-			<Content error={errorMessage}>
+			<PrivateContent access={[ROLE.ADMIN]} serverError={errorMessage}>
 				<H2>Пользователи</H2>
 				<div>
 					<TableRow>
@@ -60,11 +71,11 @@ const UserContainer = ({ className }) => {
 							roles={roles.filter(
 								({ id: roleId }) => roleId !== ROLE.GUEST,
 							)}
-							onUserRomove={() => onUserRomove(id)}
+							onUserRemove={() => onUserRemove(id)}
 						/>
 					))}
 				</div>
-			</Content>
+			</PrivateContent>
 		</div>
 	);
 };

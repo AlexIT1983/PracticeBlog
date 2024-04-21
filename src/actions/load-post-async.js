@@ -1,8 +1,10 @@
 // Асинхронный экшн, который позволит диспатчить обычные экшены
 import { setPostData } from './set-post-data';
 
-export const loadPostAsync = (requestServer, postId) => (dispatch) => {
+export const loadPostAsync = (requestServer, postId) => (dispatch) =>
 	requestServer('fetchPost', postId).then((postData) => {
-		dispatch(setPostData(postData.res));
+		if (postData.res) {
+			dispatch(setPostData(postData.res));
+		}
+		return postData;
 	});
-};

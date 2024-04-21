@@ -23,6 +23,6 @@ export const sessions = {
 		const dbSession = await getSession(hash);
 
 		// если пользователь есть и есть такая роль - то верннется true, иначе false
-		return !!dbSession.user && accessRoles.includes(dbSession.user.roleId);
+		return !!dbSession?.user && accessRoles.includes(dbSession.user.roleId);
 	},
 };

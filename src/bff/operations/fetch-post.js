@@ -4,11 +4,26 @@ import { getPost, getComments, getUsers } from '../api';
 
 // fetchRoles - ручка для реализации запроса post async (функция асинхронная)
 export const fetchPost = async (postId) => {
-	// запрос статьи к базе данных
-	const post = await getPost(postId);
+	// задаем статью и ошибку
+	let post;
+	let error;
+	// обработаем ошибку через try catch
+	try {
+		// запрос статьи к базе данных
+		post = await getPost(postId);
+	} catch (postError) {
+		error = postError;
+	}
+	if (error) {
+		return {
+			error,
+			res: null,
+		};
+	}
+
 	// запрос комментариев
 	const comments = await getComments(postId);
-	// console.log('comments', comments);
+
 	//запрос пользователей
 	const users = await getUsers();
 
@@ -22,7 +37,6 @@ export const fetchPost = async (postId) => {
 		};
 	});
 
-	console.log('commentsWithAutor', commentsWithAuthor);
 	// возвращем рost and commentsWithAuthor()
 	return {
 		error: null,

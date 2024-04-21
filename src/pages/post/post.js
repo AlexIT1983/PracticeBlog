@@ -1,13 +1,15 @@
 // Компонент для статьи (post)
 
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useMatch, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { PostContent, Comments, PostForm } from './components';
+import { Error, PrivateContent } from '../../components';
 import { useDispatch } from 'react-redux';
 import { useServerRequest } from '../../hooks';
 import { loadPostAsync, RESET_POST_DATA } from '../../actions';
 import { selectPost } from '../../selectors';
+import { ROLE } from '../../constans';
 
 import styled from 'styled-components';
 
@@ -15,10 +17,12 @@ import styled from 'styled-components';
 const PostContainer = ({ className }) => {
 	const dispatch = useDispatch();
 	const params = useParams(); // для получения id статьи
+	const [isLoading, setIsLoading] = useState(true);
 	const isCreating = useMatch('/post');
 	const isEditing = useMatch('/post/:id/edit');
 	const requestServer = useServerRequest();
 	const post = useSelector(selectPost);
+	const [error, setError] = useState(null);
 
 	// будем стерать данные о постах
 	useLayoutEffect(() => {
@@ -29,24 +33,35 @@ const PostContainer = ({ className }) => {
 	useEffect(() => {
 		// делаем проверку на создание новой статьи
 		if (isCreating) {
+			setIsLoading(false);
 			return;
 		}
 
-		dispatch(loadPostAsync(requestServer, params.id));
+		dispatch(loadPostAsync(requestServer, params.id)).then((postData) => {
+			setError(postData.error);
+			setIsLoading(false);
+		});
 	}, [requestServer, params.id, dispatch, isCreating]);
 
-	return (
-		<div className={className}>
-			{isCreating || isEditing ? (
-				<PostForm post={post} />
-			) : (
-				<>
-					<PostContent post={post} />
-					<Comments comments={post.comments} postId={post.id} />
-				</>
-			)}
-		</div>
-	);
+	if (isLoading) {
+		return null;
+	}
+
+	const SpecificPostPage =
+		isCreating || isEditing ? (
+			<PrivateContent access={[ROLE.ADMIN]}>
+				<div className={className}>
+					<PostForm post={post} />
+				</div>
+			</PrivateContent>
+		) : (
+			<div className={className}>
+				<PostContent post={post} />
+				<Comments comments={post.comments} postId={post.id} />
+			</div>
+		);
+
+	return error ? <Error error={error} /> : SpecificPostPage;
 };
 
 // Стилизованный компонент
