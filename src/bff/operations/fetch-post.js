@@ -1,6 +1,7 @@
 // Функция запроса статьи  с сервера
 
-import { getPost, getComments, getUsers } from '../api';
+import { getPost } from '../api';
+import { getPostCommentsWithAuthor } from '../utils';
 
 // fetchRoles - ручка для реализации запроса post async (функция асинхронная)
 export const fetchPost = async (postId) => {
@@ -21,21 +22,8 @@ export const fetchPost = async (postId) => {
 		};
 	}
 
-	// запрос комментариев
-	const comments = await getComments(postId);
-
-	//запрос пользователей
-	const users = await getUsers();
-
-	// запросим автора комментария
-	const commentsWithAuthor = comments.map((comment) => {
-		const user = users.find(({ id }) => id === comment.authorId);
-
-		return {
-			...comment,
-			author: user?.login,
-		};
-	});
+	// получим автора через нашу утилиту
+	const commentsWithAuthor = await getPostCommentsWithAuthor(postId);
 
 	// возвращем рost and commentsWithAuthor()
 	return {

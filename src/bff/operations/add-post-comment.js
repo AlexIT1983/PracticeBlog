@@ -1,5 +1,6 @@
 // Функция запроса и добавления комментариев  с сервера
-import { addComment, getComments, getPost } from '../api';
+import { addComment, getPost } from '../api';
+import { getPostCommentsWithAuthor } from '../utils';
 import { sessions } from '../sessions';
 import { ROLE } from '../../constans';
 
@@ -24,14 +25,15 @@ export const addPostComment = async (hash, postId, userId, content) => {
 	// после получаем данные о посте
 	const post = await getPost(postId);
 
-	const comments = await getComments(postId);
+	// получим автора через нашу утилиту
+	const commentsWithAuthor = await getPostCommentsWithAuthor(postId);
 
 	// отправляем пост в ответе
 	return {
 		error: null,
 		res: {
 			...post,
-			comments,
+			comments: commentsWithAuthor,
 		},
 	};
 };

@@ -1,7 +1,8 @@
 // Операция по удалению комментария с сервера.
 
-import { deleteComment, getComments, getPost } from '../api';
+import { deleteComment, getPost } from '../api';
 import { sessions } from '../sessions';
+import { getPostCommentsWithAuthor } from '../utils';
 import { ROLE } from '../../constans';
 
 // removePostComment - ручка для реализации запроса удаления comment async (функция асинхронная)
@@ -25,14 +26,15 @@ export const removePostComment = async (hash, postId, id) => {
 	// после получаем данные о посте
 	const post = await getPost(postId);
 
-	const comments = await getComments(postId);
+	// получим автора через нашу утилиту
+	const commentsWithAuthor = await getPostCommentsWithAuthor(postId);
 
 	// отправляем пост в ответе
 	return {
 		error: null,
 		res: {
 			...post,
-			comments,
+			comments: commentsWithAuthor,
 		},
 	};
 };

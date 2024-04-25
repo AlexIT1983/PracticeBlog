@@ -1,6 +1,5 @@
 // Компонент для нашей панели пользователя
 
-import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { Icon, Button } from '../../../../components';
 import { ROLE } from '../../../../constans';
@@ -11,6 +10,8 @@ import {
 	selectUserSession,
 } from '../../../../selectors';
 import { logout } from '../../../../actions/logout';
+import { checkAccess } from '../../../../utils';
+import styled from 'styled-components';
 
 const RightAligned = styled.div`
 	display: flex;
@@ -41,6 +42,9 @@ const ControlPanelContainer = ({ className }) => {
 		sessionStorage.removeItem('userData');
 	};
 
+	// для проверки права доступа для Администратора
+	const isAdmin = checkAccess([ROLE.ADMIN], roleId);
+
 	return (
 		<div className={className}>
 			<RightAligned>
@@ -67,12 +71,20 @@ const ControlPanelContainer = ({ className }) => {
 					margin="10px 0 0 0 "
 					onClick={() => navigate(-1)}
 				/>{' '}
-				<Link to="/post">
-					<Icon id="fa-file-text-o" size="24px" margin="10px 0 0 17px " />
-				</Link>
-				<Link to="/users">
-					<Icon id="fa-users" size="24px" margin="10px 0 0 17px " />
-				</Link>
+				{isAdmin && (
+					<>
+						<Link to="/post">
+							<Icon
+								id="fa-file-text-o"
+								size="24px"
+								margin="10px 0 0 17px "
+							/>
+						</Link>
+						<Link to="/users">
+							<Icon id="fa-users" size="24px" margin="10px 0 0 17px " />
+						</Link>
+					</>
+				)}
 			</RightAligned>
 		</div>
 	);

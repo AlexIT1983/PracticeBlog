@@ -11,7 +11,7 @@
       "login": "ivan",
       "password": "ivan4321",
       "registed_at": "2012-10-09 18:56",
-      "role_id": 2,
+      "role_id": 1,
       "id": "WdKTdFm"
     },
     {
@@ -135,18 +135,39 @@
       "id": 4
     },
     {
-      "author_id": "002",
-      "post_id": "001",
-      "content": "Мой пятый комментарий к статье 2",
-      "published_at": "2037-11-11 23:54",
-      "id": 6
-    },
-    {
       "author_id": "001",
       "post_id": "001",
       "content": "мой седьмой коммент",
       "published_at": "2013-04-15 16:17",
       "id": 7
+    },
+    {
+      "author_id": "001",
+      "post_id": "001",
+      "content": "тестовый комментарий для функции",
+      "published_at": "2038-05-07 18:29",
+      "id": 8
+    },
+    {
+      "author_id": "001",
+      "post_id": "001",
+      "content": "nhhhhsdfkjdf",
+      "published_at": "2041-08-22 15:01",
+      "id": 10
+    },
+    {
+      "author_id": "002",
+      "post_id": "001",
+      "content": "Как поживает комментраий к статье 2",
+      "published_at": "2019-08-16 14:32",
+      "id": 11
+    },
+    {
+      "author_id": "003",
+      "post_id": "001",
+      "content": "статья 3",
+      "published_at": "2026-01-09 04:09",
+      "id": 12
     }
   ],
   "sessions": [
@@ -182,6 +203,17 @@
         "roleId": 0
       },
       "id": 3
+    },
+    {
+      "hash": "0.80186890207442051980990527226822450757026672363281",
+      "user": {
+        "id": "001",
+        "login": "alex",
+        "password": "qwerty123#%",
+        "registeredAt": "2050-09-22",
+        "roleId": 0
+      },
+      "id": 4
     }
   ]
 }

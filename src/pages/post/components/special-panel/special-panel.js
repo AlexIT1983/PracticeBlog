@@ -1,15 +1,19 @@
 // Отдельный компонент для панели отображения иконок
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CLOSE_MODAL, openModal, removePostAsync } from '../../../../actions';
 import styled from 'styled-components';
 import { Icon } from '../../../../components';
 import { useServerRequest } from '../../../../hooks';
+import { checkAccess } from '../../../../utils';
+import { ROLE } from '../../../../constans';
+import { selectUserRole } from '../../../../selectors';
 import { useNavigate } from 'react-router-dom';
 
 const SpecialPanelContainer = ({ className, id, publishedAt, editButton }) => {
 	const dispatch = useDispatch();
 	const requestServer = useServerRequest();
 	const navigate = useNavigate();
+	const userRole = useSelector(selectUserRole);
 
 	// функция для удаления post
 	const onPostRemove = (id) => {
@@ -27,6 +31,9 @@ const SpecialPanelContainer = ({ className, id, publishedAt, editButton }) => {
 		);
 	};
 
+	// для проверки права доступа для Администратора
+	const isAdmin = checkAccess([ROLE.ADMIN], userRole);
+
 	return (
 		<div className={className}>
 			<div className="published-at">
@@ -40,17 +47,19 @@ const SpecialPanelContainer = ({ className, id, publishedAt, editButton }) => {
 				)}
 				{publishedAt}
 			</div>
-			<div className="buttons">
-				{editButton}
-				{publishedAt && (
-					<Icon
-						id="fa fa-trash-o"
-						size="21px"
-						margin="0 0 0 10px"
-						onClick={() => onPostRemove(id)}
-					/>
-				)}
-			</div>{' '}
+			{isAdmin && (
+				<div className="buttons">
+					{editButton}
+					{publishedAt && (
+						<Icon
+							id="fa fa-trash-o"
+							size="21px"
+							margin="0 0 0 10px"
+							onClick={() => onPostRemove(id)}
+						/>
+					)}
+				</div>
+			)}
 		</div>
 	);
 };
