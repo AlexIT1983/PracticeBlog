@@ -1,8 +1,9 @@
 // Отдельный компонент для Пагинации страниц
 //(возможности переключения кнопками между страниц)
 
-import styled from 'styled-components';
 import { Button } from '../../../../components';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const PaginationContainer = ({ className, page, lastPage, setPage }) => {
 	return (
@@ -48,3 +49,10 @@ export const Pagination = styled(PaginationContainer)`
 		text-align: center;
 	}
 `;
+
+// типизация компонента
+Pagination.propTypes = {
+	page: PropTypes.number.isRequired,
+	lastPage: PropTypes.number.isRequired,
+	setPage: PropTypes.func.isRequired,
+};

@@ -1,13 +1,14 @@
 // Отдельный компонент для панели отображения иконок
 import { useDispatch, useSelector } from 'react-redux';
 import { CLOSE_MODAL, openModal, removePostAsync } from '../../../../actions';
-import styled from 'styled-components';
 import { Icon } from '../../../../components';
 import { useServerRequest } from '../../../../hooks';
 import { checkAccess } from '../../../../utils';
 import { ROLE } from '../../../../constans';
 import { selectUserRole } from '../../../../selectors';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const SpecialPanelContainer = ({ className, id, publishedAt, editButton }) => {
 	const dispatch = useDispatch();
@@ -83,3 +84,10 @@ export const SpecialPanel = styled(SpecialPanelContainer)`
 		top: -1px;
 	}
 `;
+
+// типизация компонента
+SpecialPanel.propTypes = {
+	id: PropTypes.string.isRequired,
+	publishedAt: PropTypes.string.isRequired,
+	editButton: PropTypes.node.isRequired,
+};

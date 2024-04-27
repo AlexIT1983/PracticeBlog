@@ -1,4 +1,5 @@
 // Отдельный компонент для иконок, который принимает пропсы
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // Создадим контейнер для иконки
@@ -18,3 +19,9 @@ export const Icon = styled(IconConteiner)`
 		cursor: ${({ inactive }) => (inactive ? 'default' : 'pointer')};
 	}
 `;
+
+// типизация компонента
+Icon.propTypes = {
+	id: PropTypes.string.isRequired,
+	inactive: PropTypes.string,
+};

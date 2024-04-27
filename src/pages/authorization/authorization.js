@@ -7,11 +7,11 @@ import { useState } from 'react';
 import { AuthFormError, Input, Button, H2 } from '../../components';
 import { useResetForm } from '../../hooks';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import { Link, Navigate } from 'react-router-dom';
 import { setUser } from '../../actions';
 import { selectUserRole } from '../../selectors';
 import { ROLE } from '../../constans';
+import styled from 'styled-components';
 
 // схема для формы
 const authFormSchema = yup.object().shape({

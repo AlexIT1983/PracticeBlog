@@ -1,6 +1,7 @@
 // Отдельный компонет для отображения ошибки
 import { H2 } from '../h2/h2';
 import styled from 'styled-components';
+import { PROP_TYPES } from '../../constans';
 
 const Div = styled.div`
 	display: flex;
@@ -16,3 +17,8 @@ export const Error = ({ error }) =>
 			<div>{error}</div>
 		</Div>
 	);
+
+// типизация компонента
+Error.propTypes = {
+	error: PROP_TYPES.ERROR,
+};

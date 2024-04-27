@@ -1,7 +1,8 @@
 // Компонент для поиска на главное странице.
 
-import styled from 'styled-components';
 import { Icon, Input } from '../../../../components';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const SearchContainer = ({ className, searchPhrase, onChange }) => {
 	return (
@@ -36,3 +37,9 @@ export const Search = styled(SearchContainer)`
 		top: 5px;
 	}
 `;
+
+// типизация компонента
+Search.propTypes = {
+	searchPhrase: PropTypes.string.isRequired,
+	onChange: PropTypes.func.isRequired,
+};

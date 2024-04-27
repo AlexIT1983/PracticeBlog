@@ -1,6 +1,5 @@
 // Отдельный компонент для реализации функционала редактирования статьи.
 import { useLayoutEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
 import { Icon, Input } from '../../../../components';
 import { SpecialPanel } from '../special-panel/special-panel';
 import { sanitizeContent } from './utils/sanitize-content';
@@ -8,6 +7,8 @@ import { useDispatch } from 'react-redux';
 import { useServerRequest } from '../../../../hooks';
 import { savePostAsync } from '../../../../actions';
 import { useNavigate } from 'react-router-dom';
+import { PROP_TYPES } from '../../../../constans';
+import styled from 'styled-components';
 
 const PostFormContainer = ({
 	className,
@@ -97,3 +98,8 @@ export const PostForm = styled(PostFormContainer)`
 		white-space: pre-line;
 	}
 `;
+
+// типизация компонента
+PostForm.propTypes = {
+	post: PROP_TYPES.POST.isRequired,
+};

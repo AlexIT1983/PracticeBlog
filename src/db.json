@@ -154,20 +154,6 @@
       "content": "nhhhhsdfkjdf",
       "published_at": "2041-08-22 15:01",
       "id": 10
-    },
-    {
-      "author_id": "002",
-      "post_id": "001",
-      "content": "Как поживает комментраий к статье 2",
-      "published_at": "2019-08-16 14:32",
-      "id": 11
-    },
-    {
-      "author_id": "003",
-      "post_id": "001",
-      "content": "статья 3",
-      "published_at": "2026-01-09 04:09",
-      "id": 12
     }
   ],
   "sessions": [

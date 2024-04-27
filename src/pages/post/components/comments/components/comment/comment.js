@@ -1,5 +1,4 @@
 // Компонент для комментария
-import styled from 'styled-components';
 import { Icon } from '../../../../../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeCommentAsync } from '../../../../../../actions';
@@ -7,6 +6,8 @@ import { useServerRequest } from '../../../../../../hooks';
 import { openModal, CLOSE_MODAL } from '../../../../../../actions';
 import { ROLE } from '../../../../../../constans';
 import { selectUserRole } from '../../../../../../selectors';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 // container
 const CommentContainer = ({ className, id, author, content, publishedAt, postId }) => {
@@ -95,3 +96,12 @@ export const Comment = styled(CommentContainer)`
 		display: flex;
 	}
 `;
+
+// типизация компонента
+Comment.propTypes = {
+	postId: PropTypes.string.isRequired,
+	id: PropTypes.number.isRequired,
+	author: PropTypes.string.isRequired,
+	content: PropTypes.string.isRequired,
+	publishedAt: PropTypes.string.isRequired,
+};

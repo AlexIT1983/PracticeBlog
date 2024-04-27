@@ -1,8 +1,9 @@
 // Компонент для карточки на главное странице
 
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Icon } from '../../../../components';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const PostCardContainer = ({
 	className,
@@ -77,3 +78,12 @@ export const PostCard = styled(PostCardContainer)`
 		margin: 0;
 	}
 `;
+
+// типизация компонента
+PostCard.propTypes = {
+	id: PropTypes.string.isRequired,
+	title: PropTypes.string.isRequired,
+	imageUrl: PropTypes.string.isRequired,
+	publishedAt: PropTypes.string.isRequired,
+	commentsCount: PropTypes.number.isRequired,
+};
