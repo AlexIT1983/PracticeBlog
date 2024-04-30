@@ -9,8 +9,8 @@ export const addComment = (postId, userId, content) =>
 			'Content-Type': 'application/json;charset=utf-8',
 		},
 		body: JSON.stringify({
-			author_id: userId,
 			post_id: postId,
+			author_id: userId,
 			content,
 			published_at: generateDate(),
 		}),
